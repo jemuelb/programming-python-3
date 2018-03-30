@@ -1,5 +1,5 @@
 from tkinter import *
-trace = True
+trace = True  # setting true shows that the object ID constantly changes = object keeps getting redrawn
 
 
 class CanvasEventsDemo:
@@ -12,11 +12,11 @@ class CanvasEventsDemo:
         canvas.bind('<ButtonPress-2>', self.onMove)
         self.canvas = canvas
         self.drawn = None
-        self.kinds = [canvas.create_oval, canvas.create_rectangle]
+        self.kinds = [canvas.create_oval, canvas.create_rectangle]  # these functions return an objectId
 
     def onStart(self, event):
         self.shape = self.kinds[0]
-        self.kinds = self.kinds[1:] + self.kinds[:1]
+        self.kinds = self.kinds[1:] + self.kinds[:1]  # shuffles the order
         self.start = event
         self.drawn = None
 
