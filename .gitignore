@@ -3,3 +3,5 @@
 *__pycache__*
 .DS_Store
 ch8/viewer_thumbs.py
+ch10/launchmodes.py
+ch10/scrolledtext.py
