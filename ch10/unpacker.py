@@ -7,7 +7,7 @@ mlen = len(marker)
 
 def unpack(ifile, prefix='new-'):
     for line in open(ifile):
-        if line[:mline] != marker:
+        if line[:mlen] != marker:
             output.write(line)
         else:
             name = prefix + line[mlen:-1]
