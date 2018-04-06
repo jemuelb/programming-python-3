@@ -13,13 +13,13 @@ class ShellGui(GuiMixin, GuiMakerWindowMenu):
         self.setMenuBar()
         self.setToolBar()
         self.master.title("Shell Tools Listbox")
-        self.master.iconname("Shell Tools")
+        self.master.iconname("Shell Tools")  # no effect on MacOS?
 
     def handleList(self, event):
         label = self.listbox.get(ACTIVE)
         self.runCommand(label)
 
-    def makeWidgets(self):  # overrides method from GuiMaker
+    def makeWidgets(self):  # overrides method from GuiMaker, creates a scrolling list
         sbar = Scrollbar(self)
         list = Listbox(self, bg='white')
         sbar.config(command=list.yview)
@@ -34,15 +34,15 @@ class ShellGui(GuiMixin, GuiMakerWindowMenu):
     def forToolBar(self, label):
         return True
 
-    def setToolBar(self):
+    def setToolBar(self):  # on MacOS this is bar on bottom of window
         self.toolBar = []
         for (label, action) in self.fetchCommands():
             if self.forToolBar(label):
                 self.toolBar.append((label, action, dict(side=LEFT)))
         self.toolBar.append(('Quit', self.quit, dict(side=RIGHT)))
 
-    def setMenuBar(self):
-        toolEntries = []
+    def setMenuBar(self):  # on MacOS this is the bar on top of screen
+        toolEntries = []   # this really only sets the entries for the menu bar
         self.menuBar = [
             ('File', 0, [('Quit', -1, self.quit)]),
             ('Tools', 0, toolEntries)

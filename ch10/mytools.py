@@ -18,11 +18,13 @@ class TextPak1(ListMenuGui):
         return label in {'Pack', 'Unpack'}
 
 
-class TextPak2(DictMenuGui):
+class TextPak2(DictMenuGui):  # test defaults to this class which calls pack/unpack tools
     def __init__(self):
         self.myMenu = {'Pack': runPackDialog,
                        'Unpack': runUnpackDialog,
-                       'Mtool': self.notdone}
+                       'Mtool': self.notdone,
+                       'Hello': self.notdone,
+                       'World': self.notdone}
         DictMenuGui.__init__(self)
 
 
