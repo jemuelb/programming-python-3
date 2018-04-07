@@ -80,25 +80,27 @@ class GuiInput:
 
 def redirectedGuiFunc(func, *pargs, **kargs):
     import sys
-    saveStreams = sys.stdin, sys.stdout
-    sys.stdin = GuiInput()
+    saveStreams = sys.stdin, sys.stdout  # tuple which contains the standard out/inputs
+    sys.stdin = GuiInput()  # reassigning the standards as new defined classes for GUI out/input
     sys.stdout = GuiOutput()
     sys.stderr = sys.stdout
     result = func(*pargs, **kargs)
-    sys.stdin, sys.stdout = saveStreams
+    sys.stdin, sys.stdout = saveStreams  # reassigns back to terminal out/input
     return result
 
 
 def redirectedGuiShellCmd(command):
     import os
-    input = os.popen(command, 'r')
+    input = os.popen(command, 'r')  # pipe to use shell command, opens like a file
     output = GuiOutput()
+
     def reader(input, output):
         while True:
-            line = input.readline()
+            line = input.readline()  # readline, like a file
             if not line:
                 break
             output.write(line)
+
     reader(input, output)
 
 
@@ -126,5 +128,5 @@ if __name__ == '__main__':
     Button(root, text='test files  ',
            command=lambda: makeLower(GuiInput(), GuiOutput())).pack(fill=X)
     Button(root, text='test popen  ',
-           command=lambda: redirectedGuiShellCmd('ls /')).pack(fill=X)
+           command=lambda: redirectedGuiShellCmd('ls /')).pack(fill=X)  # provides a list of top level folders
     root.mainloop()
